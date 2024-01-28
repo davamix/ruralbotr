@@ -348,7 +348,10 @@ class RuralBotWidget {
         //     transports: ["websocket"]
         // });
         
-        var connection = new signalR.HubConnectionBuilder().withUrl("https://signalrbackend.azurewebsites.net/chat").build();
+        var connection = new signalR.HubConnectionBuilder()
+            .withUrl("https://signalrbackend.azurewebsites.net/chat")
+            .withCredentials(false)
+            .build();
 
         connection.on("ResponseMessage", (message) => {
             addSystemMessage(message, "progress");
