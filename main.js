@@ -1,6 +1,6 @@
 import { styles } from "./assets.js";
 // import { io } from "https://cdn.socket.io/4.7.2/socket.io.esm.min.js";
-import * as signalR from "https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/8.0.0/signalr.min.js";
+import "https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/8.0.0/signalr.min.js";
 
 class RuralBotWidget {
     widgetContainer = null;
@@ -348,7 +348,7 @@ class RuralBotWidget {
         //     transports: ["websocket"]
         // });
         
-        var connection = signalR.HubConnectionBuilder().witgUrl("https://signalrbackend.azurewebsites.net/chat").build();
+        var connection = HubConnectionBuilder().witgUrl("https://signalrbackend.azurewebsites.net/chat").build();
 
         connection.on("ResponseMessage", (message) => {
             addSystemMessage(message, "progress");
