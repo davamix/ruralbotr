@@ -1,6 +1,6 @@
 import { styles } from "./assets.js";
 // import { io } from "https://cdn.socket.io/4.7.2/socket.io.esm.min.js";
-import "https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/8.0.0/signalr.min.js";
+// import "https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/8.0.0/signalr.min.js";
 
 class RuralBotWidget {
     widgetContainer = null;
@@ -349,31 +349,20 @@ class RuralBotWidget {
         // });
         
         var connection = new signalR.HubConnectionBuilder()
-            .withUrl("https://signalrbackend.azurewebsites.net/chat");
-        connection.withCredentials = false;
-        connection.build();
-            
+            .withUrl("https://signalrbackend.azurewebsites.net/chat", {
+                withCredentials: false
+            })
+            .withAutomaticReconnect([500, 1000, 2000])
+            .build();
 
         connection.on("ResponseMessage", (message) => {
             addSystemMessage(message, "progress");
             addSystemMessage("", "finish");
         });
-
-        async function start() {
-            try {
-                await connection.start();
-                console.log("SignalR Connected.");
-            } catch (err) {
-                console.log(err);
-                setTimeout(start, 5000);
-            }
-        };
-
-        connection.onclose(async () => {
-            await start();
+        
+        connection.start().then(() => {
+            console.log("Client connected");
         });
-
-        start();
     }
 
 }
