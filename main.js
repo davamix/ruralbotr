@@ -1,6 +1,6 @@
 import { styles } from "./assets.js";
 // import { io } from "https://cdn.socket.io/4.7.2/socket.io.esm.min.js";
-// import "https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/8.0.0/signalr.min.js";
+import "https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/8.0.0/signalr.min.js";
 
 class RuralBotWidget {
     widgetContainer = null;
