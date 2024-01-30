@@ -350,8 +350,8 @@ class RuralBotWidget {
         
         var connection = new signalR.HubConnectionBuilder()
             .withUrl("https://signalrbackend.azurewebsites.net/chat", {
-                withCredentials: false,
-                skipNegotiation: true
+                skipNegotiation: true,
+                transport: signalR.HttpTransportType.WebSockets
             })
             .withAutomaticReconnect([500, 1000, 2000])
             .build();
